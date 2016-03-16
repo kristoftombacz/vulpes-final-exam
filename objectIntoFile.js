@@ -1,7 +1,6 @@
 'use strict';
 
 var fs = require('fs');
-var util = require('util');
 var fileName = 'store.json';
 var objectToWrite = {
   name: 'kristof',
@@ -10,19 +9,11 @@ var objectToWrite = {
 };
 
 function objectIntoFile(filename, object, cb) {
-  fs.writeFile(filename, util.inspect(object), cb);
+  runIn2Seconds(fs.writeFile(filename, JSON.stringify(object), cb));
 }
 
-function runIn2Seconds() {
-  setTimeout(writeLog , 2000);
-}
-
-function writeLog(err) {
-  if(err) {
-    console.log(err);
-  } else {
-    console.log('Successful write to file ' + fileName + '!');
-  }
+function runIn2Seconds(cb) {
+  setTimeout(cb , 2000);
 }
 
 objectIntoFile(fileName, objectToWrite, runIn2Seconds);
