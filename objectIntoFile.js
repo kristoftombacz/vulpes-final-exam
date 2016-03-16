@@ -16,5 +16,13 @@ function runIn2Seconds(cb) {
   setTimeout(cb , 2000);
 }
 
-objectIntoFile(fileName, objectToWrite, runIn2Seconds);
+function writeLog(err) {
+  if(err) {
+    console.log(err);
+  } else {
+    console.log('Successful write to file ' + fileName + '!');
+  }
+}
+
+objectIntoFile(fileName, objectToWrite, runIn2Seconds(writeLog));
 
